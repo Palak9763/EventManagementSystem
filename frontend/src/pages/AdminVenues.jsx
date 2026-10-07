@@ -1,4 +1,4 @@
-﻿import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Search, MapPin, Users, CheckCircle2, XCircle,
   MoreVertical, Eye, Pencil, Trash2, Plus, X, AlertTriangle,
@@ -166,7 +166,7 @@ function AdminVenues() {
       <div className="page-header">
         <div>
           <h1>Venue Management</h1>
-          <p className="page-description">Add, edit, and remove college venues. Admin-only access.</p>
+          <p className="page-description">Add, edit, and remove college venues for events.</p>
         </div>
         <button
           id="add-venue-btn"

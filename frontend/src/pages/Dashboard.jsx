@@ -26,8 +26,8 @@ function Dashboard() {
           <h1>Dashboard Overview</h1>
           <p className="page-description">Manage your college events and registrations.</p>
         </div>
-        <button className="primary-button" type="button" onClick={() => navigate("/events")}>
-          <Plus size={17} /> Explore Events
+        <button className="primary-button" type="button" onClick={() => navigate("/events?action=create")}>
+          <Plus size={17} /> Create Event
         </button>
       </div>
 

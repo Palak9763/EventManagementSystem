@@ -180,6 +180,21 @@ function Events() {
     load();
   }, [search, category, scope]);
 
+  useEffect(() => {
+    if (loading) return;
+    const action = searchParams.get("action");
+    if (action === "create") {
+      openForm();
+    }
+    const editId = searchParams.get("edit");
+    if (editId && events.length > 0) {
+      const target = events.find((e) => String(e.id) === String(editId));
+      if (target) {
+        openManage(target);
+      }
+    }
+  }, [loading, searchParams, events]);
+
   /* =========================
      COMPLETED EVENTS FILTER
   ========================== */

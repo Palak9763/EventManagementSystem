@@ -374,6 +374,14 @@ function App() {
         <span>Participants</span>
       </NavLink>
 
+      <NavLink
+        to="/venues"
+        className="nav-item"
+      >
+        <MapPin size={19} />
+        <span>Venues</span>
+      </NavLink>
+
       <p className="menu-title management-title">
         MANAGEMENT
       </p>
@@ -654,6 +662,15 @@ function App() {
                 <Route
                   path="/participants"
                   element={<Participants />}
+                />
+
+                <Route
+                  path="/venues"
+                  element={
+                    <ProtectedRoute>
+                      <AdminVenues />
+                    </ProtectedRoute>
+                  }
                 />
 
 

@@ -823,10 +823,10 @@ class VenueListCreateView(
         return queryset
 
     def perform_create(self, serializer):
-        if not is_admin_user(self.request.user):
+        if not (is_admin_user(self.request.user) or is_organizer_user(self.request.user)):
             self.permission_denied(
                 self.request,
-                message="Only administrators can create venues."
+                message="Only administrators and organizers can create venues."
             )
         serializer.save()
 
@@ -838,15 +838,15 @@ class VenueDetailView(
     permission_classes = [IsAuthenticated]
 
     def perform_update(self, serializer):
-        if not is_admin_user(self.request.user):
+        if not (is_admin_user(self.request.user) or is_organizer_user(self.request.user)):
             self.permission_denied(
                 self.request,
-                message="Only administrators can update venues."
+                message="Only administrators and organizers can update venues."
             )
         serializer.save()
 
     def perform_destroy(self, instance):
-        if not is_admin_user(self.request.user):
+        if not (is_admin_user(self.request.user) or is_organizer_user(self.request.user)):
             self.permission_denied(self.request)
 
         now = timezone.now()

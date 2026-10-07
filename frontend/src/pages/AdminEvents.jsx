@@ -1,5 +1,6 @@
 
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import {
   Search,
@@ -10,11 +11,14 @@ import {
   Eye,
   X,
   XCircle,
+  Plus,
+  Pencil,
 } from "lucide-react";
 
 import { api, updateEventStatus } from "../api";
 
 function AdminEvents() {
+  const navigate = useNavigate();
   const [events, setEvents] = useState([]);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
@@ -172,7 +176,7 @@ function AdminEvents() {
       className="admin-dashboard"
       onClick={() => setOpenMenu(null)}
     >
-      <div className="page-header">
+      <div className="page-header" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "16px" }}>
         <div>
           <h1>Event Management</h1>
 
@@ -180,6 +184,28 @@ function AdminEvents() {
             Review pending event submissions, publish approved events, and monitor activity.
           </p>
         </div>
+
+        <button
+          type="button"
+          onClick={() => navigate("/events?action=create")}
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "8px",
+            padding: "10px 18px",
+            backgroundColor: "#2563eb",
+            color: "#ffffff",
+            borderRadius: "8px",
+            fontWeight: 600,
+            fontSize: "14px",
+            border: "none",
+            cursor: "pointer",
+            boxShadow: "0 2px 4px rgba(37,99,235,0.2)",
+          }}
+        >
+          <Plus size={18} />
+          Create Event
+        </button>
       </div>
 
       {/* Filter tabs */}
@@ -441,6 +467,15 @@ function AdminEvents() {
                           <Eye size={16} />
                           <span>View Details</span>
                         </button>
+                        <button
+                          type="button"
+                          onClick={() =>
+                            navigate(`/events?edit=${event.id}`)
+                          }
+                        >
+                          <Pencil size={16} />
+                          <span>Edit Event</span>
+                        </button>
                         {event.status !== "published" && event.status !== "completed" && (
                           <button
                             type="button"
@@ -617,6 +652,28 @@ function AdminEvents() {
                   </button>
                 </>
               )}
+              <button
+                type="button"
+                onClick={() => {
+                  const eventId = selectedEvent.id;
+                  closeModal();
+                  navigate(`/events?edit=${eventId}`);
+                }}
+                style={{
+                  padding: "8px 16px",
+                  backgroundColor: "#2563eb",
+                  color: "#ffffff",
+                  border: "none",
+                  borderRadius: "6px",
+                  fontWeight: 600,
+                  cursor: "pointer",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "6px",
+                }}
+              >
+                <Pencil size={16} /> Edit Event
+              </button>
               <button
                 type="button"
                 onClick={closeModal}
